@@ -1,15 +1,24 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, only: [:index, :edit, :update]  
   before_action :correct_user,   only: [:edit, :update]
+<<<<<<< HEAD
+  before_action :admin_user,     only: :destroy
+=======
   before_action :admin_user, only: :destroy
 
   def index
     @users = User.paginate(page: params[:page])
   end 
+>>>>>>> 7b244b52e0328b2b9f8a3586714f034bb119501a
 
   def new
     @user = User.new
   end
+  
+  def show
+    @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
+  end 
 
   def create
     @user = User.new(user_params)
